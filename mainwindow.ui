@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1137</width>
+    <height>796</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_3">
+    <item>
+     <widget class="QFrame" name="frame_2">
+      <property name="frameShape">
+       <enum>QFrame::Shape::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Shadow::Raised</enum>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QFrame" name="frame">
+         <property name="frameShape">
+          <enum>QFrame::Shape::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Shadow::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QPushButton" name="orderButton">
+            <property name="text">
+             <string>Замовлення</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="clientsButton">
+            <property name="text">
+             <string>Клієнти</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="storageButton">
+            <property name="text">
+             <string>Склад</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="employeeButton">
+            <property name="text">
+             <string>Працівники</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Orientation::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTabWidget" name="tabWidget">
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <property name="tabBarAutoHide">
+          <bool>false</bool>
+         </property>
+         <widget class="QWidget" name="tab_2">
+          <attribute name="title">
+           <string>Tab 2</string>
+          </attribute>
+          <widget class="QTableView" name="tableViewOrders">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>130</y>
+             <width>981</width>
+             <height>551</height>
+            </rect>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QWidget" name="Client">
+          <attribute name="title">
+           <string>Tab_3</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_5">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <item>
+              <widget class="QLineEdit" name="lineEditClientFirstName"/>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEditClientLastName"/>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEditClientPhone"/>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEditClientBrand"/>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEditClientModel"/>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonClientAdd">
+               <property name="text">
+                <string>Додати</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonClientDelete">
+               <property name="text">
+                <string>Видалити</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QTableView" name="tableViewClient"/>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="Storage">
+          <attribute name="title">
+           <string>Tab_4</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout">
+             <item>
+              <widget class="QLineEdit" name="lineEditName"/>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEditArticle"/>
+             </item>
+             <item>
+              <widget class="QSpinBox" name="spinBoxQty"/>
+             </item>
+             <item>
+              <widget class="QDoubleSpinBox" name="doubleSpinBoxPrice">
+               <property name="maximum">
+                <double>99999999.989999994635582</double>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEditProvider"/>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonStorageAdd">
+               <property name="text">
+                <string>Додати</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonStorageDelete">
+               <property name="text">
+                <string>Видалити</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QTableView" name="tableViewStorage"/>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="Employee">
+          <attribute name="title">
+           <string>Tab_5</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_4">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <item>
+              <widget class="QLineEdit" name="lineEditFirstName"/>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEditLastName"/>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEditPhone"/>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEditPosition"/>
+             </item>
+             <item>
+              <widget class="QSpinBox" name="spinBoxSalary"/>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonEmployeeAdd">
+               <property name="text">
+                <string>Додати</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonEmployeeDelete">
+               <property name="text">
+                <string>Видалити</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QTableView" name="tableViewEmployee"/>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1137</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
