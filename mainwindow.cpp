@@ -176,6 +176,7 @@ void MainWindow::setupClientModel()
                        "LEFT JOIN Car ON Client.id = Car.owner_id";
 
     clientModel->setQuery(queryStr);
+    clientModel->setHeaderData(0, Qt::Horizontal, "ID");
     clientModel->setHeaderData(1, Qt::Horizontal, "Ім'я");
     clientModel->setHeaderData(2, Qt::Horizontal, "Прізвище");
     clientModel->setHeaderData(3, Qt::Horizontal, "Телефон");
@@ -209,7 +210,7 @@ void MainWindow::on_pushButtonClientAdd_clicked() //ДОДАВАННЯ ЗАПИ�
         QMessageBox::warning(this, "Помилка", "Не вдалось додати запис!");
     }
 }
-void MainWindow::on_pushButtonClientDelete_clicked()
+void MainWindow::on_pushButtonClientDelete_clicked() //ВИДАЛЕННЯ ЗАПИСУ
 {
     int row = ui->tableViewClient->currentIndex().row();
     if (row < 0) {
@@ -242,6 +243,7 @@ void MainWindow::setupOrderModel()
                        "LEFT JOIN Employee ON Orders.employee_id = Employee.id";
 
     orderModel->setQuery(queryStr);
+    orderModel->setHeaderData(0, Qt::Horizontal, "ID");
     orderModel->setHeaderData(1, Qt::Horizontal, "Автомобіль");
     orderModel->setHeaderData(2, Qt::Horizontal, "Майстер");
     orderModel->setHeaderData(3, Qt::Horizontal, "Опис робіт");

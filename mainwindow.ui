@@ -11,7 +11,13 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Головна</string>
+  </property>
+  <property name="windowIcon">
+   <iconset theme="QIcon::ThemeIcon::GoHome"/>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -104,14 +110,14 @@
        <item>
         <widget class="QTabWidget" name="tabWidget">
          <property name="currentIndex">
-          <number>0</number>
+          <number>3</number>
          </property>
          <property name="tabBarAutoHide">
           <bool>false</bool>
          </property>
          <widget class="QWidget" name="tab_2">
           <attribute name="title">
-           <string>Tab 2</string>
+           <string>Замовлення</string>
           </attribute>
           <widget class="QTableView" name="tableViewOrders">
            <property name="geometry">
@@ -126,25 +132,45 @@
          </widget>
          <widget class="QWidget" name="Client">
           <attribute name="title">
-           <string>Tab_3</string>
+           <string>Клієнти</string>
           </attribute>
           <layout class="QVBoxLayout" name="verticalLayout_5">
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_3">
              <item>
-              <widget class="QLineEdit" name="lineEditClientFirstName"/>
+              <widget class="QLineEdit" name="lineEditClientFirstName">
+               <property name="placeholderText">
+                <string>Ім'я</string>
+               </property>
+              </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEditClientLastName"/>
+              <widget class="QLineEdit" name="lineEditClientLastName">
+               <property name="placeholderText">
+                <string>Прізвище</string>
+               </property>
+              </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEditClientPhone"/>
+              <widget class="QLineEdit" name="lineEditClientPhone">
+               <property name="placeholderText">
+                <string>Телефон</string>
+               </property>
+              </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEditClientBrand"/>
+              <widget class="QLineEdit" name="lineEditClientBrand">
+               <property name="placeholderText">
+                <string>Марка авто</string>
+               </property>
+              </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEditClientModel"/>
+              <widget class="QLineEdit" name="lineEditClientModel">
+               <property name="placeholderText">
+                <string>Модель</string>
+               </property>
+              </widget>
              </item>
              <item>
               <widget class="QPushButton" name="pushButtonClientAdd">
@@ -169,16 +195,24 @@
          </widget>
          <widget class="QWidget" name="Storage">
           <attribute name="title">
-           <string>Tab_4</string>
+           <string>Склад</string>
           </attribute>
           <layout class="QVBoxLayout" name="verticalLayout">
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout">
              <item>
-              <widget class="QLineEdit" name="lineEditName"/>
+              <widget class="QLineEdit" name="lineEditName">
+               <property name="placeholderText">
+                <string>Назва</string>
+               </property>
+              </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEditArticle"/>
+              <widget class="QLineEdit" name="lineEditArticle">
+               <property name="placeholderText">
+                <string>Артикул</string>
+               </property>
+              </widget>
              </item>
              <item>
               <widget class="QSpinBox" name="spinBoxQty"/>
@@ -191,19 +225,23 @@
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEditProvider"/>
+              <widget class="QLineEdit" name="lineEditProvider">
+               <property name="placeholderText">
+                <string>Постачальник</string>
+               </property>
+              </widget>
              </item>
              <item>
               <widget class="QPushButton" name="pushButtonStorageAdd">
                <property name="text">
-                <string>Додати</string>
+                <string>Замовити </string>
                </property>
               </widget>
              </item>
              <item>
               <widget class="QPushButton" name="pushButtonStorageDelete">
                <property name="text">
-                <string>Видалити</string>
+                <string>Списати</string>
                </property>
               </widget>
              </item>
@@ -216,22 +254,38 @@
          </widget>
          <widget class="QWidget" name="Employee">
           <attribute name="title">
-           <string>Tab_5</string>
+           <string>Працівники</string>
           </attribute>
           <layout class="QVBoxLayout" name="verticalLayout_4">
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_4">
              <item>
-              <widget class="QLineEdit" name="lineEditFirstName"/>
+              <widget class="QLineEdit" name="lineEditFirstName">
+               <property name="placeholderText">
+                <string>Ім'я</string>
+               </property>
+              </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEditLastName"/>
+              <widget class="QLineEdit" name="lineEditLastName">
+               <property name="placeholderText">
+                <string>Прізвище</string>
+               </property>
+              </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEditPhone"/>
+              <widget class="QLineEdit" name="lineEditPhone">
+               <property name="placeholderText">
+                <string>Телефон</string>
+               </property>
+              </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEditPosition"/>
+              <widget class="QLineEdit" name="lineEditPosition">
+               <property name="placeholderText">
+                <string>Посада</string>
+               </property>
+              </widget>
              </item>
              <item>
               <widget class="QSpinBox" name="spinBoxSalary"/>
@@ -239,14 +293,14 @@
              <item>
               <widget class="QPushButton" name="pushButtonEmployeeAdd">
                <property name="text">
-                <string>Додати</string>
+                <string>Найняти</string>
                </property>
               </widget>
              </item>
              <item>
               <widget class="QPushButton" name="pushButtonEmployeeDelete">
                <property name="text">
-                <string>Видалити</string>
+                <string>Звільнити</string>
                </property>
               </widget>
              </item>

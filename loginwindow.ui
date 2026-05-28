@@ -17,10 +17,71 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Вхід</string>
+  </property>
+  <property name="windowIcon">
+   <iconset theme="QIcon::ThemeIcon::SystemLogOut"/>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">/* Фон усього вікна */
+#LoginWindow {
+    background-color: #FFFFFF; 
+}
+
+/* Заголовок &quot;Авторизація&quot; */
+QLabel {
+    color: #111111;             
+    font-family: &quot;Segoe UI&quot;, sans-serif; 
+    font-size: 28px;          
+    font-weight: bold;           
+    background: transparent;       
+    margin-bottom: 15px;     
+}
+
+/* Поля введення (Логін/Пароль) */
+QLineEdit {
+    background-color: #F9F9F9;   
+    border: 1px solid #E5E5E5;  
+    border-radius: 20px;        
+    padding: 10px 20px;
+    color: #333333;          
+    font-size: 14px;
+    min-height: 40px;
+}
+/* Колір підказки (Placeholder) */
+QLineEdit::placeholder { 
+    color: #AAAAAA; 
+}
+
+/* Коли натискаєш на поле (Focus) */
+QLineEdit:focus {
+    background-color: #FFFFFF;
+    border: 1px solid #B68AFF;   
+}
+
+QPushButton {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #B68AFF, stop:1 #4CE8E8);
+    color: #FFFFFF;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 16px;
+    min-height: 45px;
+    margin-top: 15px;
+    border: none;
+}
+
+QPushButton:hover {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #A675FF, stop:1 #3BD6D6);
+}
+
+QPushButton:focus {
+    outline: none;
+}
+
+QMessageBox{
+	background-color:white;
+}
+</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
