@@ -19,7 +19,9 @@ MainWindow::MainWindow(QWidget *parent, DatabaseManager *dbManager)
         setupStorageModel();
         setupEmployeeModel();
         setupClientModel();
+        setupCarModel();
         setupOrderModel();
+        updateOwnerList();
     } else {
         QMessageBox::critical(this, "Помилка", "Не вдалось підключитись до бази даних!");
     }
@@ -39,13 +41,19 @@ void MainWindow::on_clientsButton_clicked()
     ui->tabWidget->setCurrentIndex(1);
 }
 
-void MainWindow::on_storageButton_clicked()
+void MainWindow::on_carButton_clicked()
 {
     ui->tabWidget->setCurrentIndex(2);
 }
-void MainWindow::on_employeeButton_clicked()
+
+void MainWindow::on_storageButton_clicked()
 {
     ui->tabWidget->setCurrentIndex(3);
+}
+
+void MainWindow::on_employeeButton_clicked()
+{
+    ui->tabWidget->setCurrentIndex(4);
 }
 
 //ТАБЛИЦЯ STORAGE
@@ -65,6 +73,7 @@ void MainWindow::setupStorageModel()
 
     ui->tableViewStorage->setModel(storageModel);
     ui->tableViewStorage->hideColumn(0);
+    ui->tableViewStorage->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
 void MainWindow::on_pushButtonStorageAdd_clicked() //ДОДАВАННЯ ЗАПИСУ
@@ -127,6 +136,7 @@ void MainWindow::setupEmployeeModel()
 
     ui->tableViewEmployee->setModel(employeeModel);
     ui->tableViewEmployee->hideColumn(0);
+    ui->tableViewEmployee->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
 void MainWindow::on_pushButtonEmployeeAdd_clicked() //ДОДАВАННЯ ЗАПИСУ
@@ -169,45 +179,42 @@ void MainWindow::on_pushButtonEmployeeDelete_clicked() //ВИДАЛЕННЯ ЗА
 //ТАБЛИЦЯ CLIENT
 void MainWindow::setupClientModel()
 {
-    clientModel = new QSqlQueryModel(this);
-    QString queryStr = "SELECT Client.id, Client.first_name, Client.last_name, Client.phoneNumber, "
-                       "Car.brand, Car.model "
-                       "FROM Client "
-                       "LEFT JOIN Car ON Client.id = Car.owner_id";
+    clientModel = new QSqlTableModel(this);
+    QString queryStr = "SELECT id, first_name, last_name, phoneNumber FROM Client";
 
     clientModel->setQuery(queryStr);
     clientModel->setHeaderData(0, Qt::Horizontal, "ID");
     clientModel->setHeaderData(1, Qt::Horizontal, "Ім'я");
     clientModel->setHeaderData(2, Qt::Horizontal, "Прізвище");
     clientModel->setHeaderData(3, Qt::Horizontal, "Телефон");
-    clientModel->setHeaderData(4, Qt::Horizontal, "Марка авто");
-    clientModel->setHeaderData(5, Qt::Horizontal, "Модель");
 
     ui->tableViewClient->setModel(clientModel);
     ui->tableViewClient->hideColumn(0);
+    ui->tableViewClient->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
-void MainWindow::on_pushButtonClientAdd_clicked() //ДОДАВАННЯ ЗАПИСУ
+void MainWindow::on_pushButtonClientAdd_clicked()
 {
     QString fName = ui->lineEditClientFirstName->text();
     QString lName = ui->lineEditClientLastName->text();
     QString phone = ui->lineEditClientPhone->text();
-    QString brand = ui->lineEditClientBrand->text();
-    QString model = ui->lineEditClientModel->text();
+
+    // Перевірка тільки особистих даних
+    if (fName.isEmpty() || phone.isEmpty()) {
+        QMessageBox::warning(this, "Помилка", "Ім'я та телефон обов'язкові!");
+        return;
+    }
 
     Client newClient(0, fName, lName, phone);
-    Car newCar(0, 0, brand, model);
 
-    if (dbManager->addClientWithCar(newClient, newCar)) {
+    if (dbManager->addClient(newClient)) {
         setupClientModel();
-
+        updateOwnerList();
         ui->lineEditClientFirstName->clear();
         ui->lineEditClientLastName->clear();
         ui->lineEditClientPhone->clear();
-        ui->lineEditClientBrand->clear();
-        ui->lineEditClientModel->clear();
     } else {
-        QMessageBox::warning(this, "Помилка", "Не вдалось додати запис!");
+        QMessageBox::warning(this, "Помилка", "Не вдалось додати клієнта!");
     }
 }
 void MainWindow::on_pushButtonClientDelete_clicked() //ВИДАЛЕННЯ ЗАПИСУ
@@ -226,12 +233,11 @@ void MainWindow::on_pushButtonClientDelete_clicked() //ВИДАЛЕННЯ ЗАП
 //ТАБЛИЦЯ ORDER
 void MainWindow::setupOrderModel()
 {
-    if (!orderModel) {
-        orderModel = new QSqlQueryModel(this);
-    }
+    orderModel = new QSqlQueryModel(this);
 
     QString queryStr = "SELECT "
                        "Orders.id, "
+                       "Client.first_name || ' ' || Client.last_name as Owner, "
                        "Car.brand || ' ' || Car.model as CarInfo, "
                        "Employee.first_name || ' ' || Employee.last_name as Master, "
                        "Orders.description, "
@@ -240,18 +246,54 @@ void MainWindow::setupOrderModel()
                        "Orders.total_price "
                        "FROM Orders "
                        "LEFT JOIN Car ON Orders.car_id = Car.id "
+                       "LEFT JOIN Client ON Car.owner_id = Client.id " // Ось цей зв'язок!
                        "LEFT JOIN Employee ON Orders.employee_id = Employee.id";
 
     orderModel->setQuery(queryStr);
     orderModel->setHeaderData(0, Qt::Horizontal, "ID");
-    orderModel->setHeaderData(1, Qt::Horizontal, "Автомобіль");
-    orderModel->setHeaderData(2, Qt::Horizontal, "Майстер");
-    orderModel->setHeaderData(3, Qt::Horizontal, "Опис робіт");
-    orderModel->setHeaderData(4, Qt::Horizontal, "Дата");
-    orderModel->setHeaderData(5, Qt::Horizontal, "Статус");
-    orderModel->setHeaderData(6, Qt::Horizontal, "Сума (грн)");
+    orderModel->setHeaderData(1, Qt::Horizontal, "Власник");
+    orderModel->setHeaderData(2, Qt::Horizontal, "Автомобіль");
+    orderModel->setHeaderData(3, Qt::Horizontal, "Майстер");
+    orderModel->setHeaderData(4, Qt::Horizontal, "Опис робіт");
+    orderModel->setHeaderData(5, Qt::Horizontal, "Дата");
+    orderModel->setHeaderData(6, Qt::Horizontal, "Статус");
+    orderModel->setHeaderData(7, Qt::Horizontal, "Сума (грн)");
 
     ui->tableViewOrders->setModel(orderModel);
     ui->tableViewOrders->hideColumn(0);
-    ui->tableViewOrders->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tableViewOrders->horizontalHeader()->setSectionResizeMode(3, QHeaderView::Stretch);
+}
+//ТАБЛИЦЯ CAR
+void MainWindow::setupCarModel()
+{
+    carModel = new QSqlQueryModel(this);
+
+    QString queryStr = "SELECT "
+                       "Car.id, "
+                       "Client.last_name || ' ' || Client.first_name AS Owner, "
+                       "Car.brand, "
+                       "Car.model "
+                       "FROM Car "
+                       "LEFT JOIN Client ON Car.owner_id = Client.id";
+
+    carModel->setQuery(queryStr);
+    carModel->setHeaderData(0, Qt::Horizontal, "ID");
+    carModel->setHeaderData(1, Qt::Horizontal, "Власник (Клієнт)");
+    carModel->setHeaderData(2, Qt::Horizontal, "Марка авто");
+    carModel->setHeaderData(3, Qt::Horizontal, "Модель");
+    carModel->setHeaderData(4, Qt::Horizontal, "Номерний знак");
+    carModel->setHeaderData(5, Qt::Horizontal, "Рік випуску");
+
+    ui->tableViewCar->setModel(carModel);
+    ui->tableViewCar->hideColumn(0);
+    ui->tableViewCar->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+}
+void MainWindow::updateOwnerList()
+{
+    ui->comboBoxCar->clear();
+    QSqlQuery query("SELECT id, last_name || ' ' || first_name FROM Client");
+
+    while (query.next()) {
+        ui->comboBoxCar->addItem(query.value(1).toString(), query.value(0).toInt());
+    }
 }

@@ -22,7 +22,9 @@ public:
     bool Login(QString username, QString password);
 
     bool createUsersTable();
+
     bool createCarTable();
+    bool addCar(Car &car);
 
     bool createStorageTable();
     bool addPart(Storage &part);
@@ -33,7 +35,7 @@ public:
     bool deleteEmployee(int id);
 
     bool createClientTable();
-    bool addClientWithCar(Client &client, Car &car);
+    bool addClient(Client &client);
     bool deleteClient(int id);
 
     bool createOrderTable();

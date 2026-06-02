@@ -1,10 +1,5 @@
 #include "databasemanager.h"
-DatabaseManager::DatabaseManager()
-{
-    if (!QSqlDatabase::contains("qt_sql_default_connection")) {
-        QSqlDatabase::addDatabase("QSQLITE");
-    }
-}
+DatabaseManager::DatabaseManager(){}
 
 DatabaseManager::~DatabaseManager()
 {
@@ -22,6 +17,8 @@ bool DatabaseManager::connectToDatabase(QString dbName)
         qDebug() << "Помилка підключення до БД:" << db.lastError().text();
         return false;
     }
+    QSqlQuery query;
+    query.exec("PRAGMA foreign_keys = ON;");
     return true;
 }
 
@@ -118,27 +115,18 @@ bool DatabaseManager::createClientTable()
     }
     return true;
 }
-bool DatabaseManager::addClientWithCar(Client &client, Car &car)
+bool DatabaseManager::addClient(Client &client)
 {
     QSqlQuery query;
     query.prepare("INSERT INTO Client (first_name, last_name, phoneNumber) "
                   "VALUES (:first_name, :last_name, :phoneNumber)");
+
     query.bindValue(":first_name", client.getFname());
     query.bindValue(":last_name", client.getLname());
     query.bindValue(":phoneNumber", client.getPhoneNumber());
-    if (!query.exec()) {
-        qDebug() << "Помилка Клієнт:" << query.lastError().text();
-        return false;
-    }
-    int newOwnerId = query.lastInsertId().toInt();
-    query.prepare("INSERT INTO Car (brand, model, owner_id) "
-                  "VALUES (:brand, :model, :owner_id)");
-    query.bindValue(":brand", car.getBrand());
-    query.bindValue(":model", car.getModel());
-    query.bindValue(":owner_id", newOwnerId);
 
     if (!query.exec()) {
-        qDebug() << "Помилка Машина:" << query.lastError().text();
+        qDebug() << "Помилка Клієнт:" << query.lastError().text();
         return false;
     }
     return true;
@@ -169,6 +157,8 @@ bool DatabaseManager::createCarTable()
                         "id INTEGER PRIMARY KEY AUTOINCREMENT, "
                         "brand TEXT NOT NULL, "
                         "model TEXT NOT NULL, "
+                        "license_plate TEXT, "
+                        "year INTEGER, "
                         "owner_id INTEGER NOT NULL, "
                         "FOREIGN KEY(owner_id) REFERENCES Client(id))";
 
@@ -178,7 +168,19 @@ bool DatabaseManager::createCarTable()
     }
     return true;
 }
+bool DatabaseManager::addCar(Car &car)
+{
+    QSqlQuery query;
+    query.prepare("INSERT INTO Car (brand, model, license_plate, year, owner_id) "
+                  "VALUES (:brand, :model, :plate, :year, :owner_id)");
+    query.bindValue(":brand", car.getBrand());
+    query.bindValue(":model", car.getModel());
+    query.bindValue(":plate", car.getLicensePlate());
+    query.bindValue(":year", car.getYear());
+    query.bindValue(":owner_id", car.getOwnerId());
 
+    return query.exec();
+}
 //EMPLOYEE
 bool DatabaseManager::createEmployeeTable()
 {

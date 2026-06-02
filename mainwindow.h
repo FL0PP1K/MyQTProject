@@ -41,6 +41,8 @@ private slots:
 
     void on_pushButtonClientDelete_clicked();
 
+    void on_carButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     DatabaseManager *dbManager;
@@ -49,10 +51,13 @@ private:
     void setupEmployeeModel();
     void setupClientModel();
     void setupOrderModel();
+    void setupCarModel();
+    void updateOwnerList();
 
     QSqlTableModel *storageModel; //QSqlTableModel для 1 таблиці
     QSqlTableModel *employeeModel;
-    QSqlQueryModel *clientModel; //QSqlQueryModel для обєднання 2 таблиць(join)
+    QSqlQueryModel *carModel; //QSqlQueryModel для обєднання 2 таблиць(join)
+    QSqlTableModel *clientModel;
     QSqlQueryModel *orderModel;
 };
 #endif // MAINWINDOW_H

@@ -8,15 +8,19 @@ protected:
     int ownerId;
     QString brand;
     QString model;
+    QString licensePlate;
+    int year;
 
 public:
     Car();
-    Car(int id, int ownerId, QString brand, QString model);
+    Car(int id, int ownerId, QString brand, QString model, QString licensePlate, int year);
 
     int getId();
     int getOwnerId();
     QString getBrand();
     QString getModel();
+    QString getLicensePlate();
+    int getYear();
 };
 
 #endif // CAR_H

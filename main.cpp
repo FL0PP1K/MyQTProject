@@ -1,5 +1,6 @@
 #include <QApplication>
 #include <QDialog>
+#include <QMessageBox>
 #include "loginwindow.h"
 #include "mainwindow.h"
 int main(int argc, char *argv[])
