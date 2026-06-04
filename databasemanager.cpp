@@ -181,6 +181,13 @@ bool DatabaseManager::addCar(Car &car)
 
     return query.exec();
 }
+bool DatabaseManager::deleteCar(int id)
+{
+    QSqlQuery query;
+    query.prepare("DELETE FROM Car WHERE id = :id");
+    query.bindValue(":id", id);
+    return query.exec();
+}
 //EMPLOYEE
 bool DatabaseManager::createEmployeeTable()
 {

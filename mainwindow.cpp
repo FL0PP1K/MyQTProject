@@ -263,6 +263,7 @@ void MainWindow::setupOrderModel()
     ui->tableViewOrders->hideColumn(0);
     ui->tableViewOrders->horizontalHeader()->setSectionResizeMode(3, QHeaderView::Stretch);
 }
+
 //ТАБЛИЦЯ CAR
 void MainWindow::setupCarModel()
 {
@@ -272,7 +273,9 @@ void MainWindow::setupCarModel()
                        "Car.id, "
                        "Client.last_name || ' ' || Client.first_name AS Owner, "
                        "Car.brand, "
-                       "Car.model "
+                       "Car.model, "
+                       "Car.license_plate, "
+                       "Car.year "
                        "FROM Car "
                        "LEFT JOIN Client ON Car.owner_id = Client.id";
 
@@ -287,6 +290,45 @@ void MainWindow::setupCarModel()
     ui->tableViewCar->setModel(carModel);
     ui->tableViewCar->hideColumn(0);
     ui->tableViewCar->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+}
+void MainWindow::on_pushButtonCarAdd_clicked()
+{
+    QString brand = ui->lineEditCarBrand->text();
+    QString model = ui->lineEditCarModel->text();
+    QString plate = ui->lineEditCarLicencePlate->text();
+    int year = ui->spinBoxCarYear->value();
+    int ownerId = ui->comboBoxCar->currentData().toInt();
+
+    if (brand.isEmpty() || model.isEmpty() || plate.isEmpty()) {
+        QMessageBox::warning(this, "Помилка", "Марка, модель та номерний знак обов'язкові!");
+        return;
+    }
+
+    Car newCar(0, ownerId, brand, model, plate, year);
+
+    if (dbManager->addCar(newCar)) {
+        setupCarModel();
+        ui->lineEditCarBrand->clear();
+        ui->lineEditCarModel->clear();
+        ui->lineEditCarLicencePlate->clear();
+        ui->spinBoxCarYear->setValue(2000);
+        ui->comboBoxCar->setCurrentIndex(0);
+    } else {
+        QMessageBox::warning(this, "Помилка", "Не вдалось додати автомобіль!");
+    }
+}
+void MainWindow::on_pushButtonCarDelete_clicked()
+{
+    int row = ui->tableViewCar->currentIndex().row();
+    if (row < 0) {
+        QMessageBox::information(this, "Увага", "Виберіть рядок для видалення");
+        return;
+    }
+
+    int id = carModel->data(carModel->index(row, 0)).toInt();
+    if (dbManager->deleteCar(id)) {
+        setupCarModel();
+    }
 }
 void MainWindow::updateOwnerList()
 {

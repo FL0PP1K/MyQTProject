@@ -117,7 +117,7 @@
        <item>
         <widget class="QTabWidget" name="tabWidget">
          <property name="currentIndex">
-          <number>2</number>
+          <number>0</number>
          </property>
          <property name="tabBarAutoHide">
           <bool>false</bool>
@@ -128,7 +128,40 @@
           </attribute>
           <layout class="QVBoxLayout" name="verticalLayout_6">
            <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_5"/>
+            <layout class="QHBoxLayout" name="horizontalLayout_5">
+             <item>
+              <widget class="QComboBox" name="comboBox"/>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_3"/>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_2"/>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit"/>
+             </item>
+             <item>
+              <widget class="QDateEdit" name="dateEdit"/>
+             </item>
+             <item>
+              <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonOrderDelete">
+               <property name="text">
+                <string>PushButton</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonOrderAdd">
+               <property name="text">
+                <string>PushButton</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
            <item>
             <widget class="QTableView" name="tableViewOrders"/>
@@ -192,19 +225,54 @@
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_6">
              <item>
-              <widget class="QComboBox" name="comboBoxCar"/>
+              <widget class="QComboBox" name="comboBoxCar">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="editable">
+                <bool>false</bool>
+               </property>
+               <property name="currentText">
+                <string/>
+               </property>
+               <property name="placeholderText">
+                <string>Вибрати клієнта</string>
+               </property>
+              </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEditCarBrand"/>
+              <widget class="QLineEdit" name="lineEditCarBrand">
+               <property name="placeholderText">
+                <string>Марка авто</string>
+               </property>
+              </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEditCarYear"/>
+              <widget class="QLineEdit" name="lineEditCarModel">
+               <property name="placeholderText">
+                <string>Модель</string>
+               </property>
+              </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEditCarLicencePlate"/>
+              <widget class="QLineEdit" name="lineEditCarLicencePlate">
+               <property name="placeholderText">
+                <string>Номерний знак</string>
+               </property>
+              </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEditCarModel"/>
+              <widget class="QSpinBox" name="spinBoxCarYear">
+               <property name="minimum">
+                <number>1900</number>
+               </property>
+               <property name="maximum">
+                <number>3000</number>
+               </property>
+              </widget>
              </item>
              <item>
               <widget class="QPushButton" name="pushButtonCarAdd">
@@ -322,7 +390,17 @@
               </widget>
              </item>
              <item>
-              <widget class="QSpinBox" name="spinBoxSalary"/>
+              <widget class="QSpinBox" name="spinBoxSalary">
+               <property name="readOnly">
+                <bool>false</bool>
+               </property>
+               <property name="buttonSymbols">
+                <enum>QAbstractSpinBox::ButtonSymbols::UpDownArrows</enum>
+               </property>
+               <property name="specialValueText">
+                <string/>
+               </property>
+              </widget>
              </item>
              <item>
               <widget class="QPushButton" name="pushButtonEmployeeAdd">

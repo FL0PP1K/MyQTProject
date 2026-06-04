@@ -25,6 +25,7 @@ public:
 
     bool createCarTable();
     bool addCar(Car &car);
+    bool deleteCar(int id);
 
     bool createStorageTable();
     bool addPart(Storage &part);

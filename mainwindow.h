@@ -43,6 +43,10 @@ private slots:
 
     void on_carButton_clicked();
 
+    void on_pushButtonCarAdd_clicked();
+
+    void on_pushButtonCarDelete_clicked();
+
 private:
     Ui::MainWindow *ui;
     DatabaseManager *dbManager;
