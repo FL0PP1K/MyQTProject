@@ -50,6 +50,9 @@
             <property name="checked">
              <bool>false</bool>
             </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item>
@@ -63,12 +66,27 @@
             <property name="checked">
              <bool>false</bool>
             </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="carButton">
             <property name="text">
              <string>Автомобілі</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+            <property name="autoRepeat">
+             <bool>false</bool>
+            </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -83,6 +101,9 @@
             <property name="checked">
              <bool>false</bool>
             </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item>
@@ -95,6 +116,9 @@
             </property>
             <property name="checked">
              <bool>false</bool>
+            </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -129,35 +153,86 @@
           <layout class="QVBoxLayout" name="verticalLayout_6">
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_5">
+             <property name="spacing">
+              <number>10</number>
+             </property>
              <item>
-              <widget class="QComboBox" name="comboBox"/>
+              <widget class="QComboBox" name="comboBoxOrderClient">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="placeholderText">
+                <string>Власник</string>
+               </property>
+              </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_3"/>
+              <widget class="QComboBox" name="comboBoxOrderCar">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="placeholderText">
+                <string>Автомобіль</string>
+               </property>
+              </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_2"/>
+              <widget class="QComboBox" name="comboBoxOrderEmployee">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="placeholderText">
+                <string>Майстер</string>
+               </property>
+              </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit"/>
+              <widget class="QLineEdit" name="lineEditOrderDescription">
+               <property name="placeholderText">
+                <string>Опис робіт</string>
+               </property>
+              </widget>
              </item>
              <item>
-              <widget class="QDateEdit" name="dateEdit"/>
+              <widget class="QDateEdit" name="dateEditOrder"/>
              </item>
              <item>
-              <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
+              <widget class="QComboBox" name="comboBoxOrderStatus"/>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButtonOrderDelete">
-               <property name="text">
-                <string>PushButton</string>
+              <widget class="QDoubleSpinBox" name="doubleSpinBoxOrderSum">
+               <property name="maximum">
+                <double>999999.000000000000000</double>
                </property>
               </widget>
              </item>
              <item>
               <widget class="QPushButton" name="pushButtonOrderAdd">
                <property name="text">
-                <string>PushButton</string>
+                <string>Додати</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonOrderUpdate">
+               <property name="text">
+                <string>Оновити</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonOrderDelete">
+               <property name="text">
+                <string>Видалити</string>
                </property>
               </widget>
              </item>
@@ -399,6 +474,9 @@
                </property>
                <property name="specialValueText">
                 <string/>
+               </property>
+               <property name="maximum">
+                <number>99999999</number>
                </property>
               </widget>
              </item>

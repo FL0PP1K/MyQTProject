@@ -9,7 +9,7 @@ private:
     int carId;
     int employeeId;
     QString description;
-    QDate orderDate;
+    QString orderDate;
     QString status;
     double totalPrice;
 
@@ -19,7 +19,7 @@ public:
           int carId,
           int employeeId,
           QString description,
-          QDate orderDate,
+          QString orderDate,
           QString status,
           double totalPrice);
 
@@ -27,7 +27,7 @@ public:
     int getCarId();
     int getEmployeeId();
     QString getDescription();
-    QDate getOrderDate();
+    QString getOrderDate();
     QString getStatus();
     double getTotalPrice();
 

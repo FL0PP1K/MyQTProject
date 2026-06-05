@@ -12,8 +12,9 @@ public:
     Employee(
         int id, QString fName, QString lName, QString phoneNumber, QString position, double salary);
 
-    QString getPosition();
-    double getSalary();
+    QString getPosition() const;
+    double getSalary() const;
+    QString getShortInfo() const;
 };
 
 #endif // EMPLOYEE_H

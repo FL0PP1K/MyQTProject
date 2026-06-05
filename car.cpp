@@ -17,23 +17,23 @@ Car::Car(int id, int ownerId, QString brand, QString model, QString licensePlate
     , year(year)
 {}
 
-int Car::getId()
+int Car::getId() const
 {
     return id;
 }
-int Car::getOwnerId()
+int Car::getOwnerId() const
 {
     return ownerId;
 }
-QString Car::getBrand()
+QString Car::getBrand() const
 {
     return brand;
 }
-QString Car::getModel()
+QString Car::getModel() const
 {
     return model;
 }
-QString Car::getLicensePlate()
+QString Car::getLicensePlate() const
 {
     return licensePlate;
 }

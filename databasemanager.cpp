@@ -134,19 +134,9 @@ bool DatabaseManager::addClient(Client &client)
 bool DatabaseManager::deleteClient(int id)
 {
     QSqlQuery query;
-    query.prepare("DELETE FROM Car WHERE owner_id = :id");
-    query.bindValue(":id", id);
-    if (!query.exec()) {
-        qDebug() << "Помилка видалення авто:" << query.lastError().text();
-        return false;
-    }
     query.prepare("DELETE FROM Client WHERE id = :id");
     query.bindValue(":id", id);
-    if (!query.exec()) {
-        qDebug() << "Помилка видалення клієнта:" << query.lastError().text();
-        return false;
-    }
-    return true;
+    return query.exec();
 }
 
 //CAR
@@ -160,13 +150,8 @@ bool DatabaseManager::createCarTable()
                         "license_plate TEXT, "
                         "year INTEGER, "
                         "owner_id INTEGER NOT NULL, "
-                        "FOREIGN KEY(owner_id) REFERENCES Client(id))";
-
-    if (!query.exec(createStr)) {
-        qDebug() << "Помилка створення таблиці Car:" << query.lastError().text();
-        return false;
-    }
-    return true;
+                        "FOREIGN KEY(owner_id) REFERENCES Client(id) ON DELETE CASCADE)";
+    return query.exec(createStr);
 }
 bool DatabaseManager::addCar(Car &car)
 {
@@ -178,7 +163,6 @@ bool DatabaseManager::addCar(Car &car)
     query.bindValue(":plate", car.getLicensePlate());
     query.bindValue(":year", car.getYear());
     query.bindValue(":owner_id", car.getOwnerId());
-
     return query.exec();
 }
 bool DatabaseManager::deleteCar(int id)
@@ -216,7 +200,6 @@ bool DatabaseManager::addEmployee(Employee &emp)
     query.bindValue(":phoneNumber", emp.getPhoneNumber());
     query.bindValue(":position", emp.getPosition());
     query.bindValue(":salary", emp.getSalary());
-
     return query.exec();
 }
 bool DatabaseManager::deleteEmployee(int id)
@@ -238,11 +221,51 @@ bool DatabaseManager::createOrderTable()
                         "order_date TEXT,"
                         "status TEXT,"
                         "total_price REAL,"
-                        "FOREIGN KEY(car_id) REFERENCES Car(id),"
-                        "FOREIGN KEY(employee_id) REFERENCES Employee(id))";
-    if (!query.exec(createStr)) {
-        qDebug() << "Помилка створення таблиці:" << query.lastError().text();
-        return false;
-    }
-    return true;
+                        "FOREIGN KEY(car_id) REFERENCES Car(id) ON DELETE CASCADE,"
+                        "FOREIGN KEY(employee_id) REFERENCES Employee(id) ON DELETE SET NULL)";
+    return query.exec(createStr);
+}
+bool DatabaseManager::addOrder(Order &order)
+{
+    QSqlQuery query;
+    query.prepare(
+        "INSERT INTO Orders (car_id, employee_id, description, order_date, status, total_price) "
+        "VALUES (:car_id, :employee_id, :description, :order_date, :status, :total_price)");
+    query.bindValue(":car_id", order.getCarId());
+    query.bindValue(":employee_id", order.getEmployeeId());
+    query.bindValue(":description", order.getDescription());
+    query.bindValue(":order_date", order.getOrderDate());
+    query.bindValue(":status", order.getStatus());
+    query.bindValue(":total_price", order.getTotalPrice());
+    return query.exec();
+}
+bool DatabaseManager::deleteOrder(int id)
+{
+    QSqlQuery query;
+    query.prepare("DELETE FROM Orders WHERE id = :id");
+    query.bindValue(":id", id);
+    return query.exec();
+}
+bool DatabaseManager::updateOrder(
+    int id, int carId, int employeeId, QString description, QString status, double price)
+{
+    QSqlQuery query;
+    query.prepare("UPDATE Orders SET car_id = :car_id, employee_id = :employee_id, "
+                  "description = :description, status = :status, total_price = :price "
+                  "WHERE id = :id");
+    query.bindValue(":car_id", carId);
+    query.bindValue(":employee_id", employeeId);
+    query.bindValue(":description", description);
+    query.bindValue(":status", status);
+    query.bindValue(":price", price);
+    query.bindValue(":id", id);
+    return query.exec();
+}
+bool DatabaseManager::updateOrderStatus(int id, QString newStatus)
+{
+    QSqlQuery query;
+    query.prepare("UPDATE Orders SET status = :status WHERE id = :id");
+    query.bindValue(":status", newStatus);
+    query.bindValue(":id", id);
+    return query.exec();
 }

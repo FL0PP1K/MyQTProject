@@ -2,39 +2,47 @@
 
 Storage::Storage()
     : id(0)
+    , name("")
+    , article("")
     , quantity(0)
     , price(0.0)
+    , provider("")
 {}
-Storage::Storage(QString name, QString article, int quantity, double price, QString provider)
-    : name(name)
+Storage::Storage(int id,
+                 const QString &name,
+                 const QString &article,
+                 int quantity,
+                 double price,
+                 const QString &provider)
+    : id(id)
+    , name(name)
     , article(article)
     , quantity(quantity)
     , price(price)
     , provider(provider)
 {}
 
-int Storage::getID()
+int Storage::getId() const
 {
     return id;
 }
-QString Storage::getName()
+QString Storage::getName() const
 {
     return name;
 }
-QString Storage::getArticle()
+QString Storage::getArticle() const
 {
     return article;
 }
-int Storage::getQuantity()
+int Storage::getQuantity() const
 {
     return quantity;
 }
-double Storage::getPrice()
+double Storage::getPrice() const
 {
     return price;
 }
-
-QString Storage::getProvider()
+QString Storage::getProvider() const
 {
     return provider;
 }

@@ -13,19 +13,19 @@ Human::Human(int id, QString fName, QString lName, QString phoneNumber)
     , phoneNumber(phoneNumber)
 {}
 
-int Human::getId()
+int Human::getId() const
 {
     return id;
 }
-QString Human::getFname()
+QString Human::getFname() const
 {
     return fName;
 }
-QString Human::getLname()
+QString Human::getLname() const
 {
     return lName;
 }
-QString Human::getPhoneNumber()
+QString Human::getPhoneNumber() const
 {
     return phoneNumber;
 }

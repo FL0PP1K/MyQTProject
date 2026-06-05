@@ -3,7 +3,7 @@
 #include <QString>
 class Car
 {
-protected:
+private:
     int id;
     int ownerId;
     QString brand;
@@ -15,11 +15,11 @@ public:
     Car();
     Car(int id, int ownerId, QString brand, QString model, QString licensePlate, int year);
 
-    int getId();
-    int getOwnerId();
-    QString getBrand();
-    QString getModel();
-    QString getLicensePlate();
+    int getId() const;
+    int getOwnerId() const;
+    QString getBrand() const;
+    QString getModel() const;
+    QString getLicensePlate() const;
     int getYear();
 };
 

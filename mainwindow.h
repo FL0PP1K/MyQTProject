@@ -47,6 +47,12 @@ private slots:
 
     void on_pushButtonCarDelete_clicked();
 
+    void on_pushButtonOrderAdd_clicked();
+
+    void on_pushButtonOrderUpdate_clicked();
+
+    void on_pushButtonOrderDelete_clicked();
+
 private:
     Ui::MainWindow *ui;
     DatabaseManager *dbManager;
@@ -57,6 +63,7 @@ private:
     void setupOrderModel();
     void setupCarModel();
     void updateOwnerList();
+    void updateOrderList();
 
     QSqlTableModel *storageModel; //QSqlTableModel для 1 таблиці
     QSqlTableModel *employeeModel;

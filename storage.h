@@ -1,6 +1,7 @@
 #ifndef STORAGE_H
 #define STORAGE_H
 #include <QString>
+
 class Storage
 {
 private:
@@ -13,14 +14,19 @@ private:
 
 public:
     Storage();
-    Storage(QString name, QString article, int quantity, double price, QString provider);
+    Storage(int id,
+            const QString &name,
+            const QString &article,
+            int quantity,
+            double price,
+            const QString &provider);
 
-    int getID();
-    QString getName();
-    QString getArticle();
-    int getQuantity();
-    double getPrice();
-    QString getProvider();
+    int getId() const;
+    QString getName() const;
+    QString getArticle() const;
+    int getQuantity() const;
+    double getPrice() const;
+    QString getProvider() const;
 };
 
 #endif // STORAGE_H

@@ -11,11 +11,15 @@ Employee::Employee(
     , position(position)
     , salary(salary)
 {}
-QString Employee::getPosition()
+QString Employee::getPosition() const
 {
     return position;
 }
-double Employee::getSalary()
+double Employee::getSalary() const
 {
     return salary;
+}
+QString Employee::getShortInfo() const
+{
+    return getLname() + " " + getFname() + " (" + position + ")";
 }

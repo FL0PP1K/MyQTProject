@@ -6,11 +6,7 @@ Client::Client()
 Client::Client(int id, QString fName, QString lName, QString phoneNumber)
     : Human(id, fName, lName, phoneNumber)
 {}
-void Client::addCar(Car &newCar)
+QString Client::getFullName() const
 {
-    ownerCar.append(newCar); //append додає елемент в кінець списку QList
-}
-QList<Car> Client::getCars()
-{
-    return ownerCar;
+    return getLname() + " " + getFname();
 }

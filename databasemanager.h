@@ -8,6 +8,7 @@
 #include "car.h"
 #include "client.h"
 #include "employee.h"
+#include "order.h"
 #include "storage.h"
 class DatabaseManager
 {
@@ -40,6 +41,12 @@ public:
     bool deleteClient(int id);
 
     bool createOrderTable();
+    bool addOrder(Order &order);
+    bool deleteOrder(int id);
+
+    bool updateOrder(
+        int id, int carId, int employeeId, QString description, QString status, double price);
+    bool updateOrderStatus(int id, QString newStatus);
 };
 
 #endif // DATABASEMANAGER_H

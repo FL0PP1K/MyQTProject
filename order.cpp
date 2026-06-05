@@ -10,7 +10,7 @@ Order::Order(int id,
              int carId,
              int employeeId,
              QString description,
-             QDate orderDate,
+             QString orderDate,
              QString status,
              double totalPrice)
     : id(id)
@@ -38,7 +38,7 @@ QString Order::getDescription()
 {
     return description;
 };
-QDate Order::getOrderDate()
+QString Order::getOrderDate()
 {
     return orderDate;
 };
