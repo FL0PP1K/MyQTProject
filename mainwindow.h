@@ -53,6 +53,10 @@ private slots:
 
     void on_pushButtonOrderDelete_clicked();
 
+    void on_pushButtonStorageSearch_clicked();
+
+    void on_pushButtonClientSearch_clicked();
+
 private:
     Ui::MainWindow *ui;
     DatabaseManager *dbManager;

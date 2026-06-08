@@ -141,7 +141,7 @@
        <item>
         <widget class="QTabWidget" name="tabWidget">
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <property name="tabBarAutoHide">
           <bool>false</bool>
@@ -268,6 +268,20 @@
               <widget class="QLineEdit" name="lineEditClientPhone">
                <property name="placeholderText">
                 <string>Телефон</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_7">
+             <item>
+              <widget class="QLineEdit" name="lineEditClientSearch"/>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonClientSearch">
+               <property name="text">
+                <string>Пошук</string>
                </property>
               </widget>
              </item>
@@ -405,6 +419,20 @@
               <widget class="QLineEdit" name="lineEditProvider">
                <property name="placeholderText">
                 <string>Постачальник</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_8">
+             <item>
+              <widget class="QLineEdit" name="lineEditStorageSearch"/>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonStorageSearch">
+               <property name="text">
+                <string>Пошук</string>
                </property>
               </widget>
              </item>

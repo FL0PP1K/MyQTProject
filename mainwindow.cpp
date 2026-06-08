@@ -125,6 +125,18 @@ void MainWindow::on_pushButtonStorageDelete_clicked() //ВИДАЛЕННЯ ЗА�
     }
 }
 
+void MainWindow::on_pushButtonStorageSearch_clicked()
+{
+    QString searchTerm = ui->lineEditStorageSearch->text();
+    if (searchTerm.isEmpty()) {
+        storageModel->setFilter("");
+    } else {
+        QString filter = QString("name LIKE '%%1%' OR article LIKE '%%1%' OR provider LIKE '%%1%'")
+                             .arg(searchTerm);
+        storageModel->setFilter(filter);
+    }
+    storageModel->select();
+}
 //ТАБЛИЦЯ EMPLOYEE
 void MainWindow::setupEmployeeModel()
 {
@@ -249,6 +261,20 @@ void MainWindow::on_pushButtonClientDelete_clicked() //ВИДАЛЕННЯ ЗАП
                               "Помилка",
                               "Не вдалося видалити клієнта через обмеження бази даних.");
     }
+}
+
+void MainWindow::on_pushButtonClientSearch_clicked()
+{
+    QString searchTerm = ui->lineEditClientSearch->text();
+    if (searchTerm.isEmpty()) {
+        clientModel->setFilter("");
+    } else {
+        QString filter
+            = QString("first_name LIKE '%%1%' OR last_name LIKE '%%1%' OR phoneNumber LIKE '%%1%'")
+                  .arg(searchTerm);
+        clientModel->setFilter(filter);
+    }
+    clientModel->select();
 }
 //ТАБЛИЦЯ ORDER
 void MainWindow::setupOrderModel()
