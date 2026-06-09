@@ -23,24 +23,20 @@ public:
     bool Login(QString username, QString password);
 
     bool createUsersTable();
+    bool createTable();
 
-    bool createCarTable();
     bool addCar(Car &car);
     bool deleteCar(int id);
 
-    bool createStorageTable();
     bool addPart(Storage &part);
     bool deletePart(int id);
 
-    bool createEmployeeTable();
     bool addEmployee(Employee &employee);
     bool deleteEmployee(int id);
 
-    bool createClientTable();
     bool addClient(Client &client);
     bool deleteClient(int id);
 
-    bool createOrderTable();
     bool addOrder(Order &order);
     bool deleteOrder(int id);
 

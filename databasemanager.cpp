@@ -21,20 +21,6 @@ bool DatabaseManager::connectToDatabase(QString dbName)
     query.exec("PRAGMA foreign_keys = ON;");
     return true;
 }
-
-bool DatabaseManager::Login(QString username, QString password)
-{
-    QSqlQuery query;
-    query.prepare("SELECT * FROM users WHERE username = :username AND password = :password");
-    query.bindValue(":username", username);
-    query.bindValue(":password", password);
-    if (query.exec()) {
-        return query.next();
-    }
-    return false;
-}
-
-//USERS
 bool DatabaseManager::createUsersTable()
 {
     QSqlQuery query;
@@ -59,8 +45,7 @@ bool DatabaseManager::createUsersTable()
     return true;
 }
 
-//STORAGE
-bool DatabaseManager::createStorageTable()
+bool DatabaseManager::createTable()
 {
     QSqlQuery query;
     QString createStr = "CREATE TABLE IF NOT EXISTS Storage ("
@@ -75,7 +60,75 @@ bool DatabaseManager::createStorageTable()
         return false;
     }
     return true;
+
+    createStr = "CREATE TABLE IF NOT EXISTS Client ("
+                "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                "first_name TEXT NOT NULL,"
+                "last_name TEXT NOT NULL,"
+                "phoneNumber TEXT UNIQUE NOT NULL)";
+    if (!query.exec(createStr)) {
+        qDebug() << "Помилка створення таблиці:" << query.lastError().text();
+        return false;
+    }
+    return true;
+
+    createStr = "CREATE TABLE IF NOT EXISTS Car ("
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                "brand TEXT NOT NULL, "
+                "model TEXT NOT NULL, "
+                "license_plate TEXT, "
+                "year INTEGER, "
+                "owner_id INTEGER NOT NULL, "
+                "FOREIGN KEY(owner_id) REFERENCES Client(id) ON DELETE CASCADE)";
+    if (!query.exec(createStr)) {
+        qDebug() << "Помилка створення таблиці:" << query.lastError().text();
+        return false;
+    }
+    return true;
+
+    createStr = "CREATE TABLE IF NOT EXISTS Employee ("
+                "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                "first_name TEXT NOT NULL,"
+                "last_name TEXT NOT NULL,"
+                "phoneNumber TEXT UNIQUE NOT NULL,"
+                "position TEXT NOT NULL,"
+                "salary REAL NOT NULL)";
+    if (!query.exec(createStr)) {
+        qDebug() << "Помилка створення таблиці:" << query.lastError().text();
+        return false;
+    }
+    return true;
+
+    createStr = "CREATE TABLE IF NOT EXISTS Orders ("
+                "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                "car_id INTEGER,"
+                "employee_id INTEGER,"
+                "description TEXT NOT NULL,"
+                "order_date TEXT,"
+                "status TEXT,"
+                "total_price REAL,"
+                "FOREIGN KEY(car_id) REFERENCES Car(id) ON DELETE CASCADE,"
+                "FOREIGN KEY(employee_id) REFERENCES Employee(id) ON DELETE SET NULL)";
+    if (!query.exec(createStr)) {
+        qDebug() << "Помилка створення таблиці:" << query.lastError().text();
+        return false;
+    }
+    return true;
 }
+
+bool DatabaseManager::Login(QString username, QString password)
+{
+    QSqlQuery query;
+    query.prepare("SELECT * FROM users WHERE username = :username AND password = :password");
+    query.bindValue(":username", username);
+    query.bindValue(":password", password);
+    if (query.exec()) {
+        return query.next();
+    }
+    return false;
+}
+
+//STORAGE
 bool DatabaseManager::addPart(Storage &part)
 {
     QSqlQuery query;
@@ -101,20 +154,6 @@ bool DatabaseManager::deletePart(int id)
 }
 
 //CLIENT
-bool DatabaseManager::createClientTable()
-{
-    QSqlQuery query;
-    QString createStr = "CREATE TABLE IF NOT EXISTS Client ("
-                        "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                        "first_name TEXT NOT NULL,"
-                        "last_name TEXT NOT NULL,"
-                        "phoneNumber TEXT UNIQUE NOT NULL)";
-    if (!query.exec(createStr)) {
-        qDebug() << "Помилка створення таблиці:" << query.lastError().text();
-        return false;
-    }
-    return true;
-}
 bool DatabaseManager::addClient(Client &client)
 {
     QSqlQuery query;
@@ -140,19 +179,6 @@ bool DatabaseManager::deleteClient(int id)
 }
 
 //CAR
-bool DatabaseManager::createCarTable()
-{
-    QSqlQuery query;
-    QString createStr = "CREATE TABLE IF NOT EXISTS Car ("
-                        "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                        "brand TEXT NOT NULL, "
-                        "model TEXT NOT NULL, "
-                        "license_plate TEXT, "
-                        "year INTEGER, "
-                        "owner_id INTEGER NOT NULL, "
-                        "FOREIGN KEY(owner_id) REFERENCES Client(id) ON DELETE CASCADE)";
-    return query.exec(createStr);
-}
 bool DatabaseManager::addCar(Car &car)
 {
     QSqlQuery query;
@@ -173,23 +199,6 @@ bool DatabaseManager::deleteCar(int id)
     return query.exec();
 }
 //EMPLOYEE
-bool DatabaseManager::createEmployeeTable()
-{
-    QSqlQuery query;
-    QString createStr = "CREATE TABLE IF NOT EXISTS Employee ("
-                        "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                        "first_name TEXT NOT NULL,"
-                        "last_name TEXT NOT NULL,"
-                        "phoneNumber TEXT UNIQUE NOT NULL,"
-                        "position TEXT NOT NULL,"
-                        "salary REAL NOT NULL)";
-    if (!query.exec(createStr)) {
-        qDebug() << "Помилка створення таблиці:" << query.lastError().text();
-        return false;
-    }
-    return true;
-}
-
 bool DatabaseManager::addEmployee(Employee &emp)
 {
     QSqlQuery query;
@@ -210,21 +219,6 @@ bool DatabaseManager::deleteEmployee(int id)
     return query.exec();
 }
 //ORDER
-bool DatabaseManager::createOrderTable()
-{
-    QSqlQuery query;
-    QString createStr = "CREATE TABLE IF NOT EXISTS Orders ("
-                        "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                        "car_id INTEGER,"
-                        "employee_id INTEGER,"
-                        "description TEXT NOT NULL,"
-                        "order_date TEXT,"
-                        "status TEXT,"
-                        "total_price REAL,"
-                        "FOREIGN KEY(car_id) REFERENCES Car(id) ON DELETE CASCADE,"
-                        "FOREIGN KEY(employee_id) REFERENCES Employee(id) ON DELETE SET NULL)";
-    return query.exec(createStr);
-}
 bool DatabaseManager::addOrder(Order &order)
 {
     QSqlQuery query;

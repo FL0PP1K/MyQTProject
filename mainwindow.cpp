@@ -11,11 +11,7 @@ MainWindow::MainWindow(QWidget *parent, DatabaseManager *dbManager)
     ui->setupUi(this);
     ui->tabWidget->tabBar()->hide();
     if (dbManager) {
-        dbManager->createStorageTable();
-        dbManager->createClientTable();
-        dbManager->createEmployeeTable();
-        dbManager->createCarTable();
-        dbManager->createOrderTable();
+        dbManager->createTable();
 
         setupStorageModel();
         setupEmployeeModel();

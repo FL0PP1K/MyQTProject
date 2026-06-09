@@ -8,12 +8,7 @@ Storage::Storage()
     , price(0.0)
     , provider("")
 {}
-Storage::Storage(int id,
-                 const QString &name,
-                 const QString &article,
-                 int quantity,
-                 double price,
-                 const QString &provider)
+Storage::Storage(int id, QString name, QString article, int quantity, double price, QString provider)
     : id(id)
     , name(name)
     , article(article)

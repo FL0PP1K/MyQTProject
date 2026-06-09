@@ -14,12 +14,7 @@ private:
 
 public:
     Storage();
-    Storage(int id,
-            const QString &name,
-            const QString &article,
-            int quantity,
-            double price,
-            const QString &provider);
+    Storage(int id, QString name, QString article, int quantity, double price, QString provider);
 
     int getId() const;
     QString getName() const;
