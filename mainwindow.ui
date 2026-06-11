@@ -17,7 +17,211 @@
    <iconset theme="QIcon::ThemeIcon::GoHome"/>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">/* --- ГОЛОВНЕ ВІКНО ТА КОНТЕЙНЕРИ --- */
+QMainWindow, QWidget#centralwidget {
+    background-color: #F4F6F9;
+}
+
+QFrame#frame {
+    background-color: #FFFFFF;
+    border-right: 1px solid #E5E5E5;
+}
+
+QFrame#frame_2 {
+    background-color: transparent;
+    border: none;
+}
+
+/* --- ВНУТРІШНІ СТОРІНКИ ВКЛАДОК (Фікс чорного фону) --- */
+QTabWidget &gt; QWidget {
+    background-color: #FFFFFF;
+}
+
+QTabWidget::pane {
+    border: 1px solid #E5E5E5;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    margin-top: -1px;
+}
+
+QTabBar::tab {
+    background-color: #F4F6F9;
+    color: #888888;
+    border: 1px solid #E5E5E5;
+    border-bottom: none;
+    padding: 8px 20px;
+    margin-right: 2px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    font-family: &quot;Segoe UI&quot;, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+QTabBar::tab:selected {
+    background-color: #FFFFFF;
+    color: #111111;
+    border-top: 3px solid #B68AFF;
+}
+
+/* --- БІЧНЕ МЕНЮ --- */
+QFrame#frame QPushButton {
+    background-color: transparent;
+    color: #555555;
+    font-family: &quot;Segoe UI&quot;, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: left;
+    padding: 12px 20px;
+    border: none;
+    margin: 2px 0px;
+}
+
+QFrame#frame QPushButton:hover {
+    background-color: #F9F9F9;
+    color: #B68AFF;
+}
+
+QFrame#frame QPushButton:checked {
+    background-color: #F3EBFF;
+    color: #B68AFF;
+    border-left: 4px solid #B68AFF;
+}
+
+/* --- ПОЛЯ ВВЕДЕННЯ (QLineEdit, Спінбокси, Дати, Комбобокси) --- */
+QLineEdit, QComboBox, QSpinBox, QDoubleSpinBox, QDateEdit {
+    background-color: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    border-radius: 8px;
+    padding: 4px 10px;
+    color: #333333;
+    font-family: &quot;Segoe UI&quot;, sans-serif;
+    font-size: 14px;
+    min-height: 30px;
+}
+
+QLineEdit:focus, QComboBox:focus, QSpinBox:focus, QDoubleSpinBox:focus, QDateEdit:focus {
+    border: 1px solid #B68AFF;
+    background-color: #FFFFFF;
+}
+
+QLineEdit::placeholder {
+    color: #AAAAAA;
+}
+
+QComboBox::drop-down, 
+QSpinBox::up-button, QSpinBox::down-button,
+QDoubleSpinBox::up-button, QDoubleSpinBox::down-button,
+QDateEdit::up-button, QDateEdit::down-button {
+    border: none;
+    background: transparent;
+}
+
+/* --- ГОЛОВНІ КНОПКИ (Додати, Видалити, Пошук) --- */
+QTabWidget QPushButton {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #B68AFF, stop:1 #4CE8E8);
+    color: #FFFFFF;
+    border-radius: 15px;
+    font-family: &quot;Segoe UI&quot;, sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 0px 20px;
+    min-height: 32px;
+    border: none;
+}
+
+QTabWidget QPushButton:hover {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #A675FF, stop:1 #3BD6D6);
+}
+
+QTabWidget QPushButton:pressed {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #9555FF, stop:1 #2AC4C4);
+}
+
+/* --- ТАБЛИЦІ (QTableView) --- */
+QTableView {
+    background-color: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    border-radius: 8px;
+    gridline-color: #EEEEEE;
+    
+    /* Примусово задаємо темний колір тексту для таблиці */
+    color: #333333; 
+    selection-background-color: #F3EBFF;
+    selection-color: #111111;
+    font-family: &quot;Segoe UI&quot;, sans-serif;
+    font-size: 13px;
+    alternate-background-color: #FAFAFA;
+}
+
+/* Фікс внутрішніх віджетів з відновленням кольору тексту */
+QTableView QWidget {
+    background-color: #FFFFFF;
+    color: #333333;
+}
+
+/* Стиль для самих клітинок */
+QTableView::item {
+    padding: 6px;
+    color: #333333; /* Чорний текст у таблиці */
+}
+
+/* Колір тексту при виділенні рядка */
+QTableView::item:selected {
+    background-color: #F3EBFF;
+    color: #111111; 
+}
+
+/* Заголовки колонок таблиці */
+QHeaderView::section {
+    background-color: #F9F9F9;
+    color: #555555; /* Темно-сірий текст для заголовків */
+    font-weight: bold;
+    font-size: 13px;
+    padding: 6px;
+    border: none;
+    border-bottom: 1px solid #E5E5E5;
+    border-right: 1px solid #E5E5E5;
+}
+
+QHeaderView::corner {
+    background-color: #F9F9F9;
+    border: none;
+}
+
+/* --- СКРОЛЛБАР --- */
+QScrollBar:vertical {
+    border: none;
+    background: #F4F6F9;
+    width: 8px;
+    border-radius: 4px;
+}
+QScrollBar::handle:vertical {
+    background: #CCCCCC;
+    min-height: 20px;
+    border-radius: 4px;
+}
+QScrollBar::handle:vertical:hover {
+    background: #B68AFF;
+}
+QScrollBar:horizontal {
+    border: none;
+    background: #F4F6F9;
+    height: 8px;
+    border-radius: 4px;
+}
+QScrollBar::handle:horizontal {
+    background: #CCCCCC;
+    min-width: 20px;
+    border-radius: 4px;
+}
+QScrollBar::handle:horizontal:hover {
+    background: #B68AFF;
+}
+QScrollBar::add-line, QScrollBar::sub-line {
+    background: none;
+    border: none;
+}</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -141,7 +345,7 @@
        <item>
         <widget class="QTabWidget" name="tabWidget">
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <property name="tabBarAutoHide">
           <bool>false</bool>
