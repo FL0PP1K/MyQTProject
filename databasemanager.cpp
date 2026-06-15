@@ -59,7 +59,6 @@ bool DatabaseManager::createTable()
         qDebug() << "Помилка створення таблиці:" << query.lastError().text();
         return false;
     }
-    return true;
 
     createStr = "CREATE TABLE IF NOT EXISTS Client ("
                 "id INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -70,7 +69,6 @@ bool DatabaseManager::createTable()
         qDebug() << "Помилка створення таблиці:" << query.lastError().text();
         return false;
     }
-    return true;
 
     createStr = "CREATE TABLE IF NOT EXISTS Car ("
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -84,7 +82,6 @@ bool DatabaseManager::createTable()
         qDebug() << "Помилка створення таблиці:" << query.lastError().text();
         return false;
     }
-    return true;
 
     createStr = "CREATE TABLE IF NOT EXISTS Employee ("
                 "id INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -97,7 +94,6 @@ bool DatabaseManager::createTable()
         qDebug() << "Помилка створення таблиці:" << query.lastError().text();
         return false;
     }
-    return true;
 
     createStr = "CREATE TABLE IF NOT EXISTS Orders ("
                 "id INTEGER PRIMARY KEY AUTOINCREMENT,"

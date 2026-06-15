@@ -548,3 +548,14 @@ void MainWindow::updateOwnerList()
         ui->comboBoxCar->addItem(query.value(1).toString(), query.value(0).toInt());
     }
 }
+
+void MainWindow::on_exitButton_clicked()
+{
+    if (QMessageBox::question(this,
+                              "Вихід",
+                              "Ви дійсно хочете вийти?",
+                              QMessageBox::Yes | QMessageBox::No)
+        == QMessageBox::Yes) {
+        QApplication::quit();
+    }
+}

@@ -23,12 +23,9 @@
    <iconset theme="QIcon::ThemeIcon::SystemLogOut"/>
   </property>
   <property name="styleSheet">
-   <string notr="true">/* Фон усього вікна */
-#LoginWindow {
+   <string notr="true">#LoginWindow {
     background-color: #FFFFFF; 
 }
-
-/* Заголовок &quot;Авторизація&quot; */
 QLabel {
     color: #111111;             
     font-family: &quot;Segoe UI&quot;, sans-serif; 
@@ -37,8 +34,6 @@ QLabel {
     background: transparent;       
     margin-bottom: 15px;     
 }
-
-/* Поля введення (Логін/Пароль) */
 QLineEdit {
     background-color: #F9F9F9;   
     border: 1px solid #E5E5E5;  
@@ -48,12 +43,10 @@ QLineEdit {
     font-size: 14px;
     min-height: 40px;
 }
-/* Колір підказки (Placeholder) */
 QLineEdit::placeholder { 
     color: #AAAAAA; 
 }
 
-/* Коли натискаєш на поле (Focus) */
 QLineEdit:focus {
     background-color: #FFFFFF;
     border: 1px solid #B68AFF;   
